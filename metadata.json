@@ -1,0 +1,7 @@
+{
+  "name": "Najeonchilgi Exhibition - Mae",
+  "description": "An elegant exhibition website for Najeonchilgi (Korean mother-of-pearl lacquerware) featuring artists' profiles and exhibition details.",
+  "requestFramePermissions": [
+    "camera"
+  ]
+}
