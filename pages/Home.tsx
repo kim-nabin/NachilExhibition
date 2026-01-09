@@ -4,7 +4,7 @@ import { notices } from '../data/mockData';
 
 
 const HERO_BG = "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&q=80&w=1920&h=1080";
-const OVERVIEW_IMAGE = '/images/main/duu.png';
+const OVERVIEW_IMAGE = '/images/main/flo.jpg';
 
 interface HomeProps {
   onArtistsClick: () => void;
