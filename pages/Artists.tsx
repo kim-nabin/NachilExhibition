@@ -52,7 +52,6 @@ const Artists: React.FC = () => {
         strengths: a.strengths
       }));
 
-      // SECURE: Call our own backend endpoint instead of Google directly
       const response = await fetch('/api/chat', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -106,13 +105,23 @@ const Artists: React.FC = () => {
                   src={artist.workUrl} 
                   alt={`${artist.name} 작품`}
                   className="w-full h-full object-cover grayscale opacity-60 group-hover:grayscale-0 group-hover:opacity-100 group-hover:scale-105 transition-all duration-1000"
+                  onError={(e) => {
+                    (e.target as HTMLImageElement).src = `https://picsum.photos/seed/work-${artist.id}/800/1000`;
+                  }}
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent"></div>
                 
                 <div className="absolute bottom-6 left-6 right-6 flex items-center justify-between">
                   <div className="flex items-center gap-4">
                     <div className="w-14 h-14 rounded-full border border-white/10 overflow-hidden ring-4 ring-black/50">
-                      <img src={artist.photoUrl} alt={artist.name} className="w-full h-full object-cover" />
+                      <img 
+                        src={artist.photoUrl} 
+                        alt={artist.name} 
+                        className="w-full h-full object-cover" 
+                        onError={(e) => {
+                          (e.target as HTMLImageElement).src = `https://api.dicebear.com/7.x/avataaars/svg?seed=${artist.name}`;
+                        }}
+                      />
                     </div>
                     <div>
                       <h4 className="text-lg font-serif text-white tracking-wide">{artist.name}</h4>
@@ -184,7 +193,14 @@ const Artists: React.FC = () => {
                               }}
                               className="bg-black/40 border border-white/10 p-2 rounded-lg cursor-pointer hover:border-cyan-500/50 transition-all group/mini"
                             >
-                              <img src={artist.workUrl} alt={artist.name} className="w-full aspect-square object-cover rounded mb-2 opacity-70 group-hover/mini:opacity-100" />
+                              <img 
+                                src={artist.workUrl} 
+                                alt={artist.name} 
+                                className="w-full aspect-square object-cover rounded mb-2 opacity-70 group-hover/mini:opacity-100" 
+                                onError={(e) => {
+                                  (e.target as HTMLImageElement).src = `https://picsum.photos/seed/work-${artist.id}/200/200`;
+                                }}
+                              />
                               <p className="text-[10px] text-center text-zinc-400 group-hover/mini:text-white">{artist.name} 작가</p>
                             </div>
                           );
@@ -276,7 +292,14 @@ const Artists: React.FC = () => {
 
             <div className="flex items-center gap-6 mb-8">
               <div className="w-20 h-20 rounded-full border border-white/10 overflow-hidden shrink-0">
-                <img src={selectedArtist.photoUrl} alt={selectedArtist.name} className="w-full h-full object-cover" />
+                <img 
+                  src={selectedArtist.photoUrl} 
+                  alt={selectedArtist.name} 
+                  className="w-full h-full object-cover" 
+                  onError={(e) => {
+                    (e.target as HTMLImageElement).src = `https://api.dicebear.com/7.x/avataaars/svg?seed=${selectedArtist.name}`;
+                  }}
+                />
               </div>
               <div>
                 <h3 className="text-3xl font-serif shimmer-text">{selectedArtist.name}</h3>

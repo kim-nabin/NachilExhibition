@@ -24,7 +24,7 @@ const Home: React.FC<HomeProps> = ({ onArtistsClick }) => {
           style={{ transform: `translateY(${scrollY * 0.3}px)` }}
         >
           <img 
-            src="/images/main/hero-bg.jpg" 
+            src="./images/main/hero-bg.jpg" 
             alt="Hero Background" 
             className="w-full h-full object-cover opacity-30 grayscale contrast-125"
             onError={(e) => {
@@ -59,24 +59,21 @@ const Home: React.FC<HomeProps> = ({ onArtistsClick }) => {
         </div>
       </section>
 
-      {/* 2. Exhibition Overview - 사용자가 제공한 사진 적용 섹션 */}
+      {/* 2. Exhibition Overview */}
       <section className="min-h-screen flex items-center px-6 snap-start snap-always py-20 bg-zinc-950/30">
         <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-16 md:gap-24 items-center">
           <div className="relative group reveal">
-            {/* 사진의 기하학적 대칭을 강조하기 위해 aspect-square 적용 */}
             <div className="relative aspect-square overflow-hidden glass-card p-2 shadow-[0_0_50px_rgba(0,0,0,0.5)]">
               <img 
-                src="/images/main/exhibition-detail.jpg" 
+                src="./images/main/exhibition-detail.jpg" 
                 alt="Najeon Geometric Detail"
                 className="w-full h-full object-cover opacity-80 group-hover:opacity-100 group-hover:scale-105 transition-all duration-1000"
                 onError={(e) => {
                   (e.target as HTMLImageElement).src = "https://images.unsplash.com/photo-1578320339911-713292415724?auto=format&fit=crop&q=80&w=800";
                 }}
               />
-              {/* 이미지 위 은은한 조명 효과 */}
               <div className="absolute inset-0 bg-gradient-to-tr from-cyan-500/5 via-transparent to-white/5 pointer-events-none"></div>
             </div>
-            {/* 장식적 요소 */}
             <div className="absolute -top-6 -left-6 w-24 h-24 border-t border-l border-cyan-500/20 -z-10"></div>
             <div className="absolute -bottom-10 -right-10 w-40 h-40 border-r border-b border-white/10 -z-10"></div>
           </div>
