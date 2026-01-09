@@ -74,7 +74,7 @@ const Artists: React.FC = () => {
       console.error("Chat Error:", error);
       setMessages(prev => [...prev, { 
         role: 'bot', 
-        text: "죄송합니다. 큐레이터 서비스에 일시적인 문제가 발생했습니다. Vercel 환경 변수에 API Key가 설정되어 있는지 확인해 주세요." 
+        text: "죄송합니다. 큐레이터 서비스에 일시적인 문제가 발생했습니다. API Key 설정을 확인해 주세요." 
       }]);
     } finally {
       setIsLoading(false);
@@ -150,18 +150,18 @@ const Artists: React.FC = () => {
         ))}
       </div>
 
-      {/* Floating Chatbot Button & Panel */}
-      <div className="fixed bottom-10 right-10 z-[60]">
+      {/* Floating Chatbot Container - FIXED for Mobile Screen Constraint */}
+      <div className="fixed bottom-6 right-6 md:bottom-10 md:right-10 z-[60]">
         {isChatOpen && (
-          <div className="absolute bottom-20 right-0 w-[350px] md:w-[400px] h-[500px] glass-card border-white/10 flex flex-col overflow-hidden shadow-2xl animate-in fade-in slide-in-from-bottom-4 duration-500">
+          <div className="fixed bottom-24 inset-x-4 md:absolute md:inset-auto md:bottom-20 md:right-0 md:w-[400px] h-[550px] md:h-[600px] glass-card border-white/10 flex flex-col overflow-hidden shadow-2xl animate-in fade-in slide-in-from-bottom-4 duration-500">
             {/* Chat Header */}
-            <div className="p-4 border-b border-white/10 bg-white/5 flex justify-between items-center">
+            <div className="p-4 border-b border-white/10 bg-white/5 flex justify-between items-center shrink-0">
               <div className="flex items-center gap-3">
                 <div className="w-2 h-2 bg-cyan-500 rounded-full animate-pulse"></div>
                 <span className="text-xs tracking-widest uppercase font-light">Exhibition Curator AI</span>
               </div>
-              <button onClick={() => setIsChatOpen(false)} className="text-zinc-500 hover:text-white">
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <button onClick={() => setIsChatOpen(false)} className="text-zinc-500 hover:text-white p-1">
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
                 </svg>
               </button>
@@ -201,7 +201,7 @@ const Artists: React.FC = () => {
                                   (e.target as HTMLImageElement).src = `https://picsum.photos/seed/work-${artist.id}/200/200`;
                                 }}
                               />
-                              <p className="text-[10px] text-center text-zinc-400 group-hover/mini:text-white">{artist.name} 작가</p>
+                              <p className="text-[10px] text-center text-zinc-400 group-hover/mini:text-white">{artist.name}</p>
                             </div>
                           );
                         })}
@@ -214,9 +214,9 @@ const Artists: React.FC = () => {
                 <div className="flex justify-start">
                   <div className="bg-white/5 p-3 rounded-2xl rounded-tl-none border border-white/5">
                     <div className="flex gap-1">
-                      <div className="w-1 h-1 bg-zinc-500 rounded-full animate-bounce"></div>
-                      <div className="w-1 h-1 bg-zinc-500 rounded-full animate-bounce [animation-delay:0.2s]"></div>
-                      <div className="w-1 h-1 bg-zinc-500 rounded-full animate-bounce [animation-delay:0.4s]"></div>
+                      <div className="w-1.5 h-1.5 bg-zinc-500 rounded-full animate-bounce"></div>
+                      <div className="w-1.5 h-1.5 bg-zinc-500 rounded-full animate-bounce [animation-delay:0.2s]"></div>
+                      <div className="w-1.5 h-1.5 bg-zinc-500 rounded-full animate-bounce [animation-delay:0.4s]"></div>
                     </div>
                   </div>
                 </div>
@@ -225,7 +225,7 @@ const Artists: React.FC = () => {
             </div>
 
             {/* Chat Input */}
-            <div className="p-4 bg-white/5 border-t border-white/10">
+            <div className="p-4 bg-white/5 border-t border-white/10 shrink-0">
               <div className="relative">
                 <input 
                   type="text"
@@ -233,14 +233,14 @@ const Artists: React.FC = () => {
                   onChange={(e) => setInputValue(e.target.value)}
                   onKeyDown={(e) => e.key === 'Enter' && handleSendMessage()}
                   placeholder="작품 스타일을 말씀해 주세요..."
-                  className="w-full bg-black/40 border border-white/10 rounded-full py-2 pl-4 pr-10 text-xs focus:outline-none focus:border-cyan-500/50 transition-all text-white"
+                  className="w-full bg-black/40 border border-white/10 rounded-full py-3 pl-4 pr-12 text-sm focus:outline-none focus:border-cyan-500/50 transition-all text-white"
                 />
                 <button 
                   onClick={handleSendMessage}
                   disabled={isLoading}
-                  className="absolute right-2 top-1/2 -translate-y-1/2 text-cyan-500 hover:text-cyan-400 disabled:text-zinc-700"
+                  className="absolute right-2 top-1/2 -translate-y-1/2 p-2 text-cyan-500 hover:text-cyan-400 disabled:text-zinc-700"
                 >
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" viewBox="0 0 20 20" fill="currentColor">
                     <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-8.707l-3-3a1 1 0 00-1.414 1.414L10.586 9H7a1 1 0 100 2h3.586l-1.293 1.293a1 1 0 101.414 1.414l3-3a1 1 0 000-1.414z" clipRule="evenodd" />
                   </svg>
                 </button>
@@ -249,9 +249,10 @@ const Artists: React.FC = () => {
           </div>
         )}
 
+        {/* Toggle Button */}
         <button 
           onClick={() => setIsChatOpen(!isChatOpen)}
-          className={`w-16 h-16 rounded-full glass-card border-white/10 flex items-center justify-center group relative overflow-hidden transition-all duration-500 ${isChatOpen ? 'rotate-90 scale-110 border-cyan-500/30' : ''}`}
+          className={`w-14 h-14 md:w-16 md:h-16 rounded-full glass-card border-white/10 flex items-center justify-center group relative overflow-hidden transition-all duration-500 shadow-xl ${isChatOpen ? 'rotate-90 scale-110 border-cyan-500/30' : ''}`}
         >
           <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/20 via-transparent to-purple-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
           {isChatOpen ? (

@@ -24,7 +24,7 @@ const Home: React.FC<HomeProps> = ({ onArtistsClick }) => {
           style={{ transform: `translateY(${scrollY * 0.3}px)` }}
         >
           <img 
-            src="./images/main/hero-bg.jpg" 
+            src="/images/main/hero-bg.jpg" 
             alt="Hero Background" 
             className="w-full h-full object-cover opacity-30 grayscale contrast-125"
             onError={(e) => {
@@ -65,7 +65,7 @@ const Home: React.FC<HomeProps> = ({ onArtistsClick }) => {
           <div className="relative group reveal">
             <div className="relative aspect-square overflow-hidden glass-card p-2 shadow-[0_0_50px_rgba(0,0,0,0.5)]">
               <img 
-                src="./images/main/exhibition-detail.jpg" 
+                src="/images/main/duu.png" 
                 alt="Najeon Geometric Detail"
                 className="w-full h-full object-cover opacity-80 group-hover:opacity-100 group-hover:scale-105 transition-all duration-1000"
                 onError={(e) => {
@@ -181,7 +181,7 @@ const Home: React.FC<HomeProps> = ({ onArtistsClick }) => {
 
             <p className="text-zinc-600 text-[10px] tracking-[0.2em] leading-loose uppercase max-w-xs">
               Designed to bridge the past and future of Korean craftsmanship.<br/>
-              &copy; 2024 Najeon Exhibition Committee.
+              &copy; 2026 Najeon Exhibition Committee.
             </p>
           </div>
         </footer>
