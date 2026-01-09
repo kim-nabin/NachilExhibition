@@ -24,9 +24,12 @@ const Home: React.FC<HomeProps> = ({ onArtistsClick }) => {
           style={{ transform: `translateY(${scrollY * 0.3}px)` }}
         >
           <img 
-            src="https://picsum.photos/seed/najeon_hero/1920/1080" 
+            src="/images/main/hero-bg.jpg" 
             alt="Hero Background" 
             className="w-full h-full object-cover opacity-30 grayscale contrast-125"
+            onError={(e) => {
+              (e.target as HTMLImageElement).src = "https://picsum.photos/seed/najeon_hero/1920/1080";
+            }}
           />
           <div className="absolute inset-0 bg-gradient-to-b from-black via-transparent to-black"></div>
         </div>
@@ -56,35 +59,46 @@ const Home: React.FC<HomeProps> = ({ onArtistsClick }) => {
         </div>
       </section>
 
-      {/* 2. Exhibition Overview */}
-      <section className="min-h-screen flex items-center px-6 snap-start snap-always py-20">
-        <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-24 items-center">
+      {/* 2. Exhibition Overview - 사용자가 제공한 사진 적용 섹션 */}
+      <section className="min-h-screen flex items-center px-6 snap-start snap-always py-20 bg-zinc-950/30">
+        <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-16 md:gap-24 items-center">
           <div className="relative group reveal">
-            <div className="relative aspect-[4/5] overflow-hidden glass-card p-1">
+            {/* 사진의 기하학적 대칭을 강조하기 위해 aspect-square 적용 */}
+            <div className="relative aspect-square overflow-hidden glass-card p-2 shadow-[0_0_50px_rgba(0,0,0,0.5)]">
               <img 
-                src="https://images.unsplash.com/photo-1578320339911-713292415724?auto=format&fit=crop&q=80&w=800" 
-                alt="Najeon Detail"
-                className="w-full h-full object-cover opacity-70 group-hover:opacity-100 group-hover:scale-105 transition-all duration-1000"
+                src="/images/main/exhibition-detail.jpg" 
+                alt="Najeon Geometric Detail"
+                className="w-full h-full object-cover opacity-80 group-hover:opacity-100 group-hover:scale-105 transition-all duration-1000"
+                onError={(e) => {
+                  (e.target as HTMLImageElement).src = "https://images.unsplash.com/photo-1578320339911-713292415724?auto=format&fit=crop&q=80&w=800";
+                }}
               />
-              <div className="absolute inset-0 bg-black/20"></div>
+              {/* 이미지 위 은은한 조명 효과 */}
+              <div className="absolute inset-0 bg-gradient-to-tr from-cyan-500/5 via-transparent to-white/5 pointer-events-none"></div>
             </div>
+            {/* 장식적 요소 */}
+            <div className="absolute -top-6 -left-6 w-24 h-24 border-t border-l border-cyan-500/20 -z-10"></div>
             <div className="absolute -bottom-10 -right-10 w-40 h-40 border-r border-b border-white/10 -z-10"></div>
           </div>
+
           <div className="reveal" style={{ transitionDelay: '0.3s' }}>
             <span className="text-cyan-400/60 text-xs tracking-widest uppercase mb-4 block">Exhibition Concept</span>
-            <h3 className="text-4xl font-serif mb-10 shimmer-text">끊어지지 않는 아름다움</h3>
+            <h3 className="text-4xl font-serif mb-10 shimmer-text">정교함이 빚어낸 영원성</h3>
             <div className="space-y-8 text-zinc-400 leading-[2] font-light text-lg">
               <p>
-                [맥(脈)]은 한국 전통 공예의 정수인 옻칠과 나전의 가치를 재조명하고, 
-                그 생명력을 미래로 잇고자 기획된 특별한 여정입니다.
+                수만 번의 칼질로 다듬어진 미세한 자개 조각들이 모여 
+                하나의 완벽한 질서를 이룹니다. 
+                사진 속 <strong>끊음질</strong>의 정교한 패턴은 단순한 장식을 넘어, 
+                작가의 인내와 시간이 응축된 결정체입니다.
               </p>
               <p>
-                단순히 전통을 모방하는 것에 그치지 않고, 30인의 작가들이 해석한 
-                현대적 조형미를 통해 나전칠기의 무한한 변주를 선보입니다.
+                [맥(脈)]은 이렇듯 보이지 않는 노력이 만드는 찬란한 빛에 주목합니다. 
+                30인의 작가들이 각자의 방식으로 해석한 나전의 기하학적 미학을 통해, 
+                전통 공예가 나아갈 현대적 방향을 제시합니다.
               </p>
-              <p className="text-zinc-500 italic text-base">
-                "어둠 속에서 영롱하게 피어오르는 자개의 빛깔은 <br/>
-                시간이 멈춘 듯한 고요 속에서 가장 찬란하게 빛납니다."
+              <p className="text-zinc-500 italic text-base border-l-2 border-cyan-500/20 pl-6 py-2">
+                "어둠을 가르는 미세한 빛의 선들이 모여 <br/>
+                가장 견고한 예술의 맥을 형성합니다."
               </p>
             </div>
           </div>
@@ -133,7 +147,6 @@ const Home: React.FC<HomeProps> = ({ onArtistsClick }) => {
                       <span className="text-[10px] tracking-widest text-zinc-600 uppercase mb-2 block">{notice.date}</span>
                       <h4 className="text-xl font-light text-zinc-300 group-hover:text-white transition-colors">{notice.title}</h4>
                     </div>
-                
                   </div>
                   <div className="max-h-0 overflow-hidden group-hover:max-h-40 transition-all duration-700 ease-in-out">
                     <p className="mt-6 text-zinc-500 text-sm leading-relaxed border-t border-white/5 pt-6">
