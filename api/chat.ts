@@ -22,29 +22,29 @@ export default async function handler(req: Request) {
         {
           role: "user",
           parts: [{
-            text: `You are an expert curator for a Najeonchilgi (Korean mother-of-pearl lacquerware) exhibition. 
-            Based on the user's request, recommend exactly 2 artists from the provided data.
-            
-            Artist Data: ${JSON.stringify(artist_data)}
-            User Request: "${message}"
-            
-            Respond in Korean.`
+            text: `사용자 요청: "${message}"`
           }]
         }
       ],
       config: {
+        systemInstruction: `당신은 '맥(脈)' 나전칠기 단체전의 전문 큐레이터입니다. 
+        사용자의 요청에 따라 제공된 아티스트 데이터에서 가장 적합한 2인의 작가를 추천하세요.
+        
+        아티스트 데이터: ${JSON.stringify(artist_data)}
+        
+        응답은 반드시 한국어로 작성하며, 추천 이유에는 해당 작가의 기법(끊음질, 줄음질 등)과 작품 세계관을 전문적으로 설명하세요.`,
         responseMimeType: "application/json",
         responseSchema: {
           type: Type.OBJECT,
           properties: {
             reason: {
               type: Type.STRING,
-              description: "The reason for recommending these artists in Korean."
+              description: "추천 이유를 포함한 큐레이터의 응답 메시지 (한국어)."
             },
             matchedIds: {
               type: Type.ARRAY,
               items: { type: Type.INTEGER },
-              description: "The IDs of the two recommended artists."
+              description: "추천된 아티스트 2인의 고유 ID 목록."
             }
           },
           required: ["reason", "matchedIds"]

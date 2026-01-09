@@ -2,6 +2,10 @@
 import React, { useEffect, useState } from 'react';
 import { notices } from '../data/mockData';
 
+
+const HERO_BG = "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&q=80&w=1920&h=1080";
+const OVERVIEW_IMAGE = '/images/main/duu.png';
+
 interface HomeProps {
   onArtistsClick: () => void;
 }
@@ -20,11 +24,11 @@ const Home: React.FC<HomeProps> = ({ onArtistsClick }) => {
       {/* 1. Hero Section */}
       <section className="h-screen flex flex-col justify-center items-center relative overflow-hidden snap-start snap-always">
         <div 
-          className="absolute inset-0 z-0 scale-110"
+          className="absolute inset-0 z-0 scale-110 bg-black"
           style={{ transform: `translateY(${scrollY * 0.3}px)` }}
         >
           <img 
-            src="/images/main/hero-bg.jpg" 
+            src={HERO_BG} 
             alt="Hero Background" 
             className="w-full h-full object-cover opacity-30 grayscale contrast-125"
             onError={(e) => {
@@ -54,7 +58,6 @@ const Home: React.FC<HomeProps> = ({ onArtistsClick }) => {
         </div>
 
         <div className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-4">
-          <span className="text-[10px] tracking-widest text-zinc-600 uppercase">Scroll to Explore</span>
           <div className="w-px h-16 bg-gradient-to-b from-white/40 to-transparent"></div>
         </div>
       </section>
@@ -63,12 +66,15 @@ const Home: React.FC<HomeProps> = ({ onArtistsClick }) => {
       <section className="min-h-screen flex items-center px-6 snap-start snap-always py-20 bg-zinc-950/30">
         <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-16 md:gap-24 items-center">
           <div className="relative group reveal">
-            <div className="relative aspect-square overflow-hidden glass-card p-2 shadow-[0_0_50px_rgba(0,0,0,0.5)]">
+            <div className="relative aspect-square overflow-hidden glass-card p-2 shadow-[0_0_50px_rgba(0,0,0,0.5)] bg-zinc-900">
               <img 
-                src="/images/main/duu.png" 
-                alt="Najeon Geometric Detail"
-                className="w-full h-full object-cover opacity-80 group-hover:opacity-100 group-hover:scale-105 transition-all duration-1000"
+                src={OVERVIEW_IMAGE} 
+                alt="Exhibition Masterpiece"
+                className="w-full h-full object-cover opacity-90 group-hover:opacity-100 group-hover:scale-105 transition-all duration-1000"
+                loading="lazy"
                 onError={(e) => {
+                  console.warn("이미지 로드 실패: ", OVERVIEW_IMAGE);
+                  // 로컬 이미지가 없을 경우를 대비한 세련된 플레이스홀더
                   (e.target as HTMLImageElement).src = "https://images.unsplash.com/photo-1578320339911-713292415724?auto=format&fit=crop&q=80&w=800";
                 }}
               />
@@ -85,8 +91,7 @@ const Home: React.FC<HomeProps> = ({ onArtistsClick }) => {
               <p>
                 수만 번의 칼질로 다듬어진 미세한 자개 조각들이 모여 
                 하나의 완벽한 질서를 이룹니다. 
-                사진 속 <strong>끊음질</strong>의 정교한 패턴은 단순한 장식을 넘어, 
-                작가의 인내와 시간이 응축된 결정체입니다.
+                작가들의 인내와 시간이 응축된 결정체를 통해 전통의 깊이를 마주하십시오.
               </p>
               <p>
                 [맥(脈)]은 이렇듯 보이지 않는 노력이 만드는 찬란한 빛에 주목합니다. 

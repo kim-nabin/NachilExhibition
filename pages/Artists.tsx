@@ -150,18 +150,18 @@ const Artists: React.FC = () => {
         ))}
       </div>
 
-      {/* Floating Chatbot Container - FIXED for Mobile Screen Constraint */}
+      {/* Floating Chatbot Container */}
       <div className="fixed bottom-6 right-6 md:bottom-10 md:right-10 z-[60]">
         {isChatOpen && (
-          <div className="fixed bottom-24 inset-x-4 md:absolute md:inset-auto md:bottom-20 md:right-0 md:w-[400px] h-[550px] md:h-[600px] glass-card border-white/10 flex flex-col overflow-hidden shadow-2xl animate-in fade-in slide-in-from-bottom-4 duration-500">
+          <div className="fixed bottom-20 inset-x-4 md:absolute md:inset-auto md:bottom-16 md:right-0 md:w-[360px] h-[450px] md:h-[500px] bg-zinc-950/95 backdrop-blur-2xl border border-white/10 flex flex-col overflow-hidden shadow-2xl animate-in fade-in slide-in-from-bottom-2 duration-500 rounded-2xl">
             {/* Chat Header */}
             <div className="p-4 border-b border-white/10 bg-white/5 flex justify-between items-center shrink-0">
               <div className="flex items-center gap-3">
                 <div className="w-2 h-2 bg-cyan-500 rounded-full animate-pulse"></div>
-                <span className="text-xs tracking-widest uppercase font-light">Exhibition Curator AI</span>
+                <span className="text-[10px] tracking-widest uppercase font-light text-zinc-400">Curator AI</span>
               </div>
               <button onClick={() => setIsChatOpen(false)} className="text-zinc-500 hover:text-white p-1">
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
                 </svg>
               </button>
@@ -171,7 +171,7 @@ const Artists: React.FC = () => {
             <div className="flex-grow overflow-y-auto p-4 space-y-4">
               {messages.map((msg, i) => (
                 <div key={i} className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}>
-                  <div className={`max-w-[85%] p-3 rounded-2xl text-sm font-light leading-relaxed ${
+                  <div className={`max-w-[85%] p-3 rounded-2xl text-xs font-light leading-relaxed ${
                     msg.role === 'user' 
                       ? 'bg-cyan-500/20 text-cyan-50 border border-cyan-500/20 rounded-tr-none' 
                       : 'bg-white/5 text-zinc-300 border border-white/5 rounded-tl-none'
@@ -201,7 +201,7 @@ const Artists: React.FC = () => {
                                   (e.target as HTMLImageElement).src = `https://picsum.photos/seed/work-${artist.id}/200/200`;
                                 }}
                               />
-                              <p className="text-[10px] text-center text-zinc-400 group-hover/mini:text-white">{artist.name}</p>
+                              <p className="text-[9px] text-center text-zinc-400 group-hover/mini:text-white">{artist.name}</p>
                             </div>
                           );
                         })}
@@ -214,9 +214,9 @@ const Artists: React.FC = () => {
                 <div className="flex justify-start">
                   <div className="bg-white/5 p-3 rounded-2xl rounded-tl-none border border-white/5">
                     <div className="flex gap-1">
-                      <div className="w-1.5 h-1.5 bg-zinc-500 rounded-full animate-bounce"></div>
-                      <div className="w-1.5 h-1.5 bg-zinc-500 rounded-full animate-bounce [animation-delay:0.2s]"></div>
-                      <div className="w-1.5 h-1.5 bg-zinc-500 rounded-full animate-bounce [animation-delay:0.4s]"></div>
+                      <div className="w-1 h-1 bg-zinc-500 rounded-full animate-bounce"></div>
+                      <div className="w-1 h-1 bg-zinc-500 rounded-full animate-bounce [animation-delay:0.2s]"></div>
+                      <div className="w-1 h-1 bg-zinc-500 rounded-full animate-bounce [animation-delay:0.4s]"></div>
                     </div>
                   </div>
                 </div>
@@ -232,15 +232,15 @@ const Artists: React.FC = () => {
                   value={inputValue}
                   onChange={(e) => setInputValue(e.target.value)}
                   onKeyDown={(e) => e.key === 'Enter' && handleSendMessage()}
-                  placeholder="작품 스타일을 말씀해 주세요..."
-                  className="w-full bg-black/40 border border-white/10 rounded-full py-3 pl-4 pr-12 text-sm focus:outline-none focus:border-cyan-500/50 transition-all text-white"
+                  placeholder="스타일을 말씀해 주세요..."
+                  className="w-full bg-black/40 border border-white/10 rounded-full py-2.5 pl-4 pr-10 text-xs focus:outline-none focus:border-cyan-500/50 transition-all text-white"
                 />
                 <button 
                   onClick={handleSendMessage}
                   disabled={isLoading}
-                  className="absolute right-2 top-1/2 -translate-y-1/2 p-2 text-cyan-500 hover:text-cyan-400 disabled:text-zinc-700"
+                  className="absolute right-1.5 top-1/2 -translate-y-1/2 p-2 text-cyan-500 hover:text-cyan-400 disabled:text-zinc-700"
                 >
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" viewBox="0 0 20 20" fill="currentColor">
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
                     <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-8.707l-3-3a1 1 0 00-1.414 1.414L10.586 9H7a1 1 0 100 2h3.586l-1.293 1.293a1 1 0 101.414 1.414l3-3a1 1 0 000-1.414z" clipRule="evenodd" />
                   </svg>
                 </button>
@@ -252,17 +252,17 @@ const Artists: React.FC = () => {
         {/* Toggle Button */}
         <button 
           onClick={() => setIsChatOpen(!isChatOpen)}
-          className={`w-14 h-14 md:w-16 md:h-16 rounded-full glass-card border-white/10 flex items-center justify-center group relative overflow-hidden transition-all duration-500 shadow-xl ${isChatOpen ? 'rotate-90 scale-110 border-cyan-500/30' : ''}`}
+          className={`w-12 h-12 md:w-14 md:h-14 rounded-full bg-zinc-900/90 backdrop-blur-xl border border-white/10 flex items-center justify-center group relative overflow-hidden transition-all duration-500 shadow-2xl ${isChatOpen ? 'rotate-90 scale-105 border-cyan-500/40' : ''}`}
         >
           <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/20 via-transparent to-purple-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
           {isChatOpen ? (
-            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-cyan-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-cyan-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
             </svg>
           ) : (
             <svg 
               xmlns="http://www.w3.org/2000/svg" 
-              className="w-7 h-7 text-zinc-400 group-hover:text-cyan-400 transition-colors relative z-10" 
+              className="w-6 h-6 text-zinc-400 group-hover:text-cyan-400 transition-colors relative z-10" 
               fill="none" 
               viewBox="0 0 24 24" 
               stroke="currentColor"
@@ -271,7 +271,7 @@ const Artists: React.FC = () => {
             </svg>
           )}
           {!isChatOpen && (
-            <div className="absolute -top-1 -right-1 w-3 h-3 bg-cyan-500 rounded-full animate-pulse shadow-[0_0_10px_rgba(6,182,212,0.5)]"></div>
+            <div className="absolute -top-0.5 -right-0.5 w-2.5 h-2.5 bg-cyan-500 rounded-full animate-pulse shadow-[0_0_8px_rgba(6,182,212,0.6)]"></div>
           )}
         </button>
       </div>
@@ -327,7 +327,7 @@ const Artists: React.FC = () => {
 
               <div>
                 <span className="text-[10px] tracking-[0.4em] text-zinc-600 uppercase mb-4 block">Philosophy</span>
-                <p className="text-zinc-400 leading-relaxed font-light italic">
+                <p className="text-zinc-400 leading-relaxed font-light italic text-sm">
                   "{selectedArtist.description}"
                 </p>
               </div>
