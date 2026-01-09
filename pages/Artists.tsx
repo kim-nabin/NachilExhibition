@@ -45,34 +45,38 @@ const Artists: React.FC = () => {
     setIsLoading(true);
 
     try {
-      // 보안을 위해 백엔드 API 서버(Port 8000 가정)로 요청을 보냅니다.
-      const response = await fetch('http://localhost:8000/api/chat', {
+      const artistContext = artists.map(a => ({
+        id: a.id,
+        name: a.name,
+        description: a.description,
+        strengths: a.strengths
+      }));
+
+      // SECURE: Call our own backend endpoint instead of Google directly
+      const response = await fetch('/api/chat', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           message: userText,
-          artist_data: artists.map(a => ({
-            id: a.id,
-            name: a.name,
-            description: a.description,
-            strengths: a.strengths
-          }))
+          artist_data: artistContext
         })
       });
 
-      if (!response.ok) throw new Error('백엔드 응답 오류');
+      if (!response.ok) throw new Error('API request failed');
 
       const result = await response.json();
+      
       setMessages(prev => [...prev, { 
         role: 'bot', 
-        text: result.reason || "요청하신 스타일에 가장 부합하는 두 분의 작가를 추천해 드립니다.",
+        text: result.reason || "요청하신 스타일에 가장 부합하는 작가를 추천해 드립니다.",
         matchedArtistIds: result.matchedIds 
       }]);
     } catch (error) {
-      console.error("Backend Chat Error:", error);
-      setMessages(prev => [...prev, { role: 'bot', text: "죄송합니다. 큐레이터 서버와 연결할 수 없습니다. 잠시 후 다시 시도해 주세요." }]);
+      console.error("Chat Error:", error);
+      setMessages(prev => [...prev, { 
+        role: 'bot', 
+        text: "죄송합니다. 큐레이터 서비스에 일시적인 문제가 발생했습니다. Vercel 환경 변수에 API Key가 설정되어 있는지 확인해 주세요." 
+      }]);
     } finally {
       setIsLoading(false);
     }
@@ -173,7 +177,11 @@ const Artists: React.FC = () => {
                           return (
                             <div 
                               key={id} 
-                              onClick={() => setSelectedArtist(artist)}
+                              onClick={() => {
+                                setSelectedArtist(artist);
+                                const el = document.getElementById(`artist-card-${id}`);
+                                el?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                              }}
                               className="bg-black/40 border border-white/10 p-2 rounded-lg cursor-pointer hover:border-cyan-500/50 transition-all group/mini"
                             >
                               <img src={artist.workUrl} alt={artist.name} className="w-full aspect-square object-cover rounded mb-2 opacity-70 group-hover/mini:opacity-100" />
@@ -207,9 +215,9 @@ const Artists: React.FC = () => {
                   type="text"
                   value={inputValue}
                   onChange={(e) => setInputValue(e.target.value)}
-                  onKeyPress={(e) => e.key === 'Enter' && handleSendMessage()}
+                  onKeyDown={(e) => e.key === 'Enter' && handleSendMessage()}
                   placeholder="작품 스타일을 말씀해 주세요..."
-                  className="w-full bg-black/40 border border-white/10 rounded-full py-2 pl-4 pr-10 text-xs focus:outline-none focus:border-cyan-500/50 transition-all"
+                  className="w-full bg-black/40 border border-white/10 rounded-full py-2 pl-4 pr-10 text-xs focus:outline-none focus:border-cyan-500/50 transition-all text-white"
                 />
                 <button 
                   onClick={handleSendMessage}

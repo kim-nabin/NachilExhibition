@@ -1,6 +1,6 @@
 
 <!DOCTYPE html>
-<html lang="ko" class="scroll-smooth">
+<html lang="ko" class="scroll-smooth snap-y snap-mandatory">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -16,7 +16,6 @@
       
       body {
         background-color: var(--najeon-deep);
-        /* Subtle radial gradient as base to prevent flat black */
         background-image: radial-gradient(circle at 50% 50%, #0d0d12 0%, #050507 100%);
         color: #fff;
         font-family: 'Pretendard', sans-serif;
@@ -57,13 +56,12 @@
         -webkit-text-fill-color: transparent;
       }
 
-      /* Mystical Haze Background - Increased visibility and refined animation */
       .haze-blob {
         position: absolute;
         border-radius: 50%;
         filter: blur(140px);
         z-index: 1;
-        opacity: 0.25; /* Increased opacity */
+        opacity: 0.25;
         pointer-events: none;
         animation: float 25s infinite alternate ease-in-out;
       }
@@ -73,15 +71,6 @@
         33% { transform: translate(10vw, 15vh) scale(1.2) rotate(120deg); }
         66% { transform: translate(-8vw, 10vh) scale(0.8) rotate(240deg); }
         100% { transform: translate(0, 0) scale(1) rotate(360deg); }
-      }
-
-      /* Parallax Container Custom Scroll */
-      .parallax-wrapper {
-        perspective: 1px;
-        height: 100vh;
-        overflow-x: hidden;
-        overflow-y: auto;
-        scroll-behavior: smooth;
       }
 
       ::-webkit-scrollbar {
@@ -96,6 +85,11 @@
       }
       ::-webkit-scrollbar-thumb:hover {
         background: #555;
+      }
+
+      /* Scroll Snap Helpers */
+      html {
+        scroll-snap-type: y mandatory;
       }
     </style>
     <script type="importmap">

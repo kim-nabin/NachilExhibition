@@ -17,8 +17,8 @@ const Home: React.FC<HomeProps> = ({ onArtistsClick }) => {
 
   return (
     <div className="w-full">
-      {/* Hero Section with Parallax */}
-      <section className="h-[110vh] flex flex-col justify-center items-center relative overflow-hidden">
+      {/* 1. Hero Section */}
+      <section className="h-screen flex flex-col justify-center items-center relative overflow-hidden snap-start snap-always">
         <div 
           className="absolute inset-0 z-0 scale-110"
           style={{ transform: `translateY(${scrollY * 0.3}px)` }}
@@ -50,20 +50,17 @@ const Home: React.FC<HomeProps> = ({ onArtistsClick }) => {
           </button>
         </div>
 
-        <div className="absolute bottom-20 left-1/2 -translate-x-1/2 flex flex-col items-center gap-4">
+        <div className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-4">
           <span className="text-[10px] tracking-widest text-zinc-600 uppercase">Scroll to Explore</span>
           <div className="w-px h-16 bg-gradient-to-b from-white/40 to-transparent"></div>
         </div>
       </section>
 
-      {/* Exhibition Overview - Parallax Image */}
-      <section className="py-40 px-6 max-w-6xl mx-auto">
-        <div className="grid md:grid-cols-2 gap-24 items-center">
+      {/* 2. Exhibition Overview */}
+      <section className="min-h-screen flex items-center px-6 snap-start snap-always py-20">
+        <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-24 items-center">
           <div className="relative group reveal">
-            <div 
-              className="relative aspect-[4/5] overflow-hidden glass-card p-1"
-              style={{ transform: `translateY(${(scrollY - 800) * -0.05}px)` }}
-            >
+            <div className="relative aspect-[4/5] overflow-hidden glass-card p-1">
               <img 
                 src="https://images.unsplash.com/photo-1578320339911-713292415724?auto=format&fit=crop&q=80&w=800" 
                 alt="Najeon Detail"
@@ -71,7 +68,6 @@ const Home: React.FC<HomeProps> = ({ onArtistsClick }) => {
               />
               <div className="absolute inset-0 bg-black/20"></div>
             </div>
-            {/* Decorative element */}
             <div className="absolute -bottom-10 -right-10 w-40 h-40 border-r border-b border-white/10 -z-10"></div>
           </div>
           <div className="reveal" style={{ transitionDelay: '0.3s' }}>
@@ -95,71 +91,91 @@ const Home: React.FC<HomeProps> = ({ onArtistsClick }) => {
         </div>
       </section>
 
-      {/* Sticky-like Venue Section with Smooth Gradient Transitions */}
-      <section className="relative min-h-[90vh] flex items-center justify-center overflow-hidden">
-        {/* Soft Background Gradient for Blending */}
-        <div className="absolute inset-0 bg-gradient-to-b from-black via-zinc-900/40 to-black -z-10"></div>
-        
-        {/* Animated accent light behind the card */}
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-cyan-500/5 blur-[120px] rounded-full pointer-events-none -z-10"></div>
+      {/* 3. Visit Us Section */}
+      <section className="relative min-h-screen flex items-center justify-center overflow-hidden snap-start snap-always">
+        <div className="absolute inset-0 bg-gradient-to-b from-black via-zinc-950 to-zinc-900/20 -z-10"></div>
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80vw] h-[80vw] bg-cyan-900/10 blur-[150px] rounded-full pointer-events-none -z-10"></div>
 
-        <div className="max-w-4xl mx-auto px-6 text-center reveal w-full">
+        <div className="max-w-4xl mx-auto px-6 text-center reveal w-full py-20">
           <h3 className="text-3xl font-serif mb-16 shimmer-text tracking-widest">VISIT US</h3>
           <div className="glass-card p-16 space-y-8 relative group overflow-hidden">
             <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/5 via-transparent to-purple-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-1000"></div>
             
             <div className="relative z-10">
-              <p className="text-2xl mb-4 font-light text-white tracking-tight">국립아트센터 특별기획전시실 1관</p>
-              <p className="text-zinc-500 font-light tracking-widest text-sm">서울시 중구 세종대로 99</p>
+              <p className="text-2xl mb-4 font-light text-white tracking-tight">갤러리 강호</p>
+              <p className="text-zinc-500 font-light tracking-widest text-sm">서울시 종로구 삼일대로 32길 22-1(2층)</p>
             </div>
             
             <div className="h-px w-20 bg-gradient-to-r from-transparent via-white/20 to-transparent mx-auto relative z-10"></div>
             
             <div className="relative z-10">
-              <p className="text-zinc-400 font-light text-lg">2024. 05. 20 — 06. 30</p>
-              <p className="text-zinc-600 text-xs mt-3 uppercase tracking-[0.4em]">10:00 AM - 06:00 PM (Monday Closed)</p>
+              <p className="text-zinc-400 font-light text-lg">2026. 06. 10 — 06. 16</p>
+              <p className="text-zinc-600 text-xs mt-3 uppercase tracking-[0.4em]">9:00 AM - 06:00 PM </p>
             </div>
           </div>
         </div>
+
+        <div className="absolute bottom-0 left-0 w-full h-64 bg-gradient-to-t from-black to-transparent z-0"></div>
       </section>
 
-      {/* Notices with Hover-Reveal */}
-      <section className="py-40 px-6 max-w-4xl mx-auto">
-        <h3 className="text-3xl font-serif mb-16 shimmer-text text-center">ANNOUNCEMENT</h3>
-        <div className="space-y-4">
-          {notices.map((notice, idx) => (
-            <div key={notice.id} className="reveal group" style={{ transitionDelay: `${idx * 0.15}s` }}>
-              <div className="glass-card p-8 cursor-pointer border-transparent hover:border-white/10 transition-all duration-500">
-                <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
-                  <div>
-                    <span className="text-[10px] tracking-widest text-zinc-600 uppercase mb-2 block">{notice.date}</span>
-                    <h4 className="text-xl font-light text-zinc-300 group-hover:text-white transition-colors">{notice.title}</h4>
+      {/* 4. Announcement Section */}
+      <section className="relative min-h-screen flex flex-col justify-center py-20 px-6 snap-start snap-always">
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[100vw] h-[100vh] bg-gradient-to-b from-transparent via-purple-900/5 to-transparent -z-10 pointer-events-none blur-[120px]"></div>
+        
+        <div className="max-w-4xl mx-auto w-full">
+          <h3 className="text-3xl font-serif mb-16 shimmer-text text-center">ANNOUNCEMENT</h3>
+          <div className="space-y-4">
+            {notices.map((notice, idx) => (
+              <div key={notice.id} className="reveal group" style={{ transitionDelay: `${idx * 0.15}s` }}>
+                <div className="glass-card p-8 cursor-pointer border-transparent hover:border-white/10 transition-all duration-500">
+                  <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
+                    <div>
+                      <span className="text-[10px] tracking-widest text-zinc-600 uppercase mb-2 block">{notice.date}</span>
+                      <h4 className="text-xl font-light text-zinc-300 group-hover:text-white transition-colors">{notice.title}</h4>
+                    </div>
+                
                   </div>
-                  <span className="text-2xl text-zinc-800 group-hover:text-cyan-400 transition-all duration-500 transform group-hover:translate-x-2">→</span>
-                </div>
-                <div className="max-h-0 overflow-hidden group-hover:max-h-40 transition-all duration-700 ease-in-out">
-                  <p className="mt-6 text-zinc-500 text-sm leading-relaxed border-t border-white/5 pt-6">
-                    {notice.content}
-                  </p>
+                  <div className="max-h-0 overflow-hidden group-hover:max-h-40 transition-all duration-700 ease-in-out">
+                    <p className="mt-6 text-zinc-500 text-sm leading-relaxed border-t border-white/5 pt-6">
+                      {notice.content}
+                    </p>
+                  </div>
                 </div>
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
-      </section>
 
-      <footer className="py-32 border-t border-white/5 bg-black/40 text-center relative overflow-hidden">
-        {/* Subtle light leak for footer */}
-        <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-full h-32 bg-gradient-to-t from-cyan-500/5 to-transparent pointer-events-none"></div>
-        
-        <div className="max-w-xl mx-auto px-6 reveal relative z-10">
-          <h2 className="font-serif text-2xl mb-8 shimmer-text">맥(脈)</h2>
-          <p className="text-zinc-600 text-xs tracking-[0.2em] leading-loose uppercase">
-            Designed to bridge the past and future of Korean craftsmanship.<br/>
-            &copy; 2024 Najeon Exhibition Committee.
-          </p>
-        </div>
-      </footer>
+        <footer className="mt-40 border-t border-white/5 bg-black/40 text-center relative overflow-hidden py-24">
+          <div className="max-w-xl mx-auto px-6 reveal relative z-10 flex flex-col items-center">
+            <h2 className="font-serif text-3xl mb-8 shimmer-text">맥(脈)</h2>
+            
+            <div className="flex flex-col items-center gap-4 mb-10">
+              <span className="text-[10px] tracking-[0.4em] text-zinc-600 uppercase">Inquiry</span>
+              <a 
+                href="https://instagram.com/nachil_guma" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="flex items-center gap-3 group transition-all duration-500"
+              >
+                <div className="p-3 rounded-full border border-white/5 bg-white/5 group-hover:border-cyan-500/30 group-hover:bg-cyan-500/5 transition-all">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="text-zinc-500 group-hover:text-cyan-400 transition-colors">
+                    <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                    <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                    <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                  </svg>
+                </div>
+                <span className="text-zinc-400 group-hover:text-white text-sm font-light tracking-widest transition-colors">@nachil_guma</span>
+              </a>
+            </div>
+
+            <p className="text-zinc-600 text-[10px] tracking-[0.2em] leading-loose uppercase max-w-xs">
+              Designed to bridge the past and future of Korean craftsmanship.<br/>
+              &copy; 2024 Najeon Exhibition Committee.
+            </p>
+          </div>
+        </footer>
+      </section>
     </div>
   );
 };
