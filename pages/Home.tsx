@@ -74,7 +74,6 @@ const Home: React.FC<HomeProps> = ({ onArtistsClick }) => {
                 loading="lazy"
                 onError={(e) => {
                   console.warn("이미지 로드 실패: ", OVERVIEW_IMAGE);
-                  // 로컬 이미지가 없을 경우를 대비한 세련된 플레이스홀더
                   (e.target as HTMLImageElement).src = "https://images.unsplash.com/photo-1578320339911-713292415724?auto=format&fit=crop&q=80&w=800";
                 }}
               />
@@ -114,19 +113,41 @@ const Home: React.FC<HomeProps> = ({ onArtistsClick }) => {
 
         <div className="max-w-4xl mx-auto px-6 text-center reveal w-full py-20">
           <h3 className="text-3xl font-serif mb-16 shimmer-text tracking-widest">VISIT US</h3>
-          <div className="glass-card p-16 space-y-8 relative group overflow-hidden">
+          <div className="glass-card p-10 md:p-16 space-y-10 relative group overflow-hidden">
             <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/5 via-transparent to-purple-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-1000"></div>
             
             <div className="relative z-10">
-              <p className="text-2xl mb-4 font-light text-white tracking-tight">갤러리 강호</p>
-              <p className="text-zinc-500 font-light tracking-widest text-sm">서울시 종로구 삼일대로 32길 22-1(2층)</p>
+              <p className="text-3xl mb-4 font-serif text-white tracking-tight">갤러리 강호</p>
+              <p className="text-zinc-400 font-light tracking-widest text-sm mb-8">서울시 종로구 삼일대로 32길 22-1(2층)</p>
+              
+              {/* Map Links */}
+              <div className="flex flex-wrap justify-center gap-4 mt-6">
+                <a 
+                  href="https://map.naver.com/p/entry/place/1226826021?placePath=/home?entry=plt&from=map&fromPanelNum=1&additionalHeight=76&timestamp=202601291220&locale=ko&svcName=map_pcv5&searchType=place&lng=126.9883030&lat=37.5752736&c=15.00,0,0,0,dh"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-3 px-6 py-3 rounded-full bg-white/5 border border-white/10 hover:border-[#03C75A]/40 hover:bg-[#03C75A]/5 transition-all group/map"
+                >
+                  <span className="w-2 h-2 rounded-full bg-[#03C75A] shadow-[0_0_10px_#03C75A]"></span>
+                  <span className="text-[10px] tracking-[0.2em] uppercase text-zinc-500 group-hover/map:text-white">Naver Map</span>
+                </a>
+                <a 
+                  href="https://place.map.kakao.com/1208850120"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-3 px-6 py-3 rounded-full bg-white/5 border border-white/10 hover:border-[#FEE500]/40 hover:bg-[#FEE500]/5 transition-all group/map"
+                >
+                  <span className="w-2 h-2 rounded-full bg-[#FEE500] shadow-[0_0_10px_#FEE500]"></span>
+                  <span className="text-[10px] tracking-[0.2em] uppercase text-zinc-500 group-hover/map:text-white">Kakao Map</span>
+                </a>
+              </div>
             </div>
             
             <div className="h-px w-20 bg-gradient-to-r from-transparent via-white/20 to-transparent mx-auto relative z-10"></div>
             
             <div className="relative z-10">
-              <p className="text-zinc-400 font-light text-lg">2026. 06. 10 — 06. 16</p>
-              <p className="text-zinc-600 text-xs mt-3 uppercase tracking-[0.4em]">9:00 AM - 06:00 PM </p>
+              <p className="text-zinc-300 font-light text-xl tracking-widest">2026. 06. 10 — 06. 16</p>
+              <p className="text-zinc-600 text-[10px] mt-4 uppercase tracking-[0.5em]">9:00 AM - 6:00 PM </p>
             </div>
           </div>
         </div>
